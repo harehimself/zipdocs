@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-   BlitzDocs is a document search and analysis platform that allows users to effortlessly comb through thousands of PDFs with blistering speed. Leveraging cutting-edge technology, BlitzDocs delivers near-zero latency search results, enabling users to quickly find and analyze relevant information buried within massive document repositories. Whether you're a researcher, legal professional, or business executive, BlitzDocs empowers you to unlock insights and make informed decisions faster than ever before.
+   ZipDocs is a document search and analysis platform that allows users to effortlessly comb through thousands of PDFs with blistering speed. Leveraging cutting-edge technology, ZipDocs delivers near-zero latency search results, enabling users to quickly find and analyze relevant information buried within massive document repositories. Whether you're a researcher, legal professional, or business executive, ZipDocs empowers you to unlock insights and make informed decisions faster than ever before.
 </p>
 <br>
 
