@@ -5,7 +5,7 @@ import nltk
 import pymongo
 from pymongo import MongoClient
 from PyPDF2 import PdfReader
-from PyPDF2.errors import EmptyFileError, PdfReadError
+from PyPDF2.errors import EmptyFileError, PdfReadError, DecodeError
 from sklearn.feature_extraction.text import TfidfVectorizer
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer, WordNetLemmatizer
@@ -88,7 +88,7 @@ for metadata in metadata_list:
                 for page in pdf_reader.pages:
                     try:
                         text_content += page.extract_text()
-                    except Exception as e:
+                    except DecodeError as e:
                         print_unicode_error(f"Skipping page with error in {filename}: {str(e)}")
                 
                 # Preprocess the text content

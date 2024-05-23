@@ -10,7 +10,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer, WordNetLemmatizer
 from dotenv import load_dotenv
-import sys
 
 # Load variables from .env file
 load_dotenv()
@@ -71,9 +70,6 @@ def preprocess_text(text):
     
     return preprocessed_text
 
-def print_unicode_error(error_message):
-    print(error_message.encode(sys.stdout.encoding, errors='replace').decode('utf-8'))
-
 # Extract text content from PDF files and generate vectors
 pdf_data = []
 for metadata in metadata_list:
@@ -86,36 +82,30 @@ for metadata in metadata_list:
                 pdf_reader = PdfReader(file)
                 text_content = ""
                 for page in pdf_reader.pages:
-                    try:
-                        text_content += page.extract_text()
-                    except Exception as e:
-                        print_unicode_error(f"Skipping page with error in {filename}: {str(e)}")
+                    text_content += page.extract_text()
                 
                 # Preprocess the text content
                 preprocessed_text = preprocess_text(text_content)
                 
-                if preprocessed_text.strip():
-                    # Generate vector representation
-                    vector = vectorizer.fit_transform([preprocessed_text]).toarray()[0]
-                    
-                    # Combine metadata and vector
-                    pdf_data.append({
-                        "filename": filename,
-                        "metadata": metadata,
-                        "vector": vector.tolist()
-                    })
-                else:
-                    print_unicode_error(f"Skipping document with empty vocabulary: {filename}")
+                # Generate vector representation
+                vector = vectorizer.fit_transform([preprocessed_text]).toarray()[0]
+                
+                # Combine metadata and vector
+                pdf_data.append({
+                    "filename": filename,
+                    "metadata": metadata,
+                    "vector": vector.tolist()
+                })
             except (EmptyFileError, PdfReadError) as e:
-                print_unicode_error(f"Skipping file with PDF reading error: {filename}")
+                print(f"Skipping file with PDF reading error: {filename}")
             except ValueError as e:
                 if "empty vocabulary" in str(e):
-                    print_unicode_error(f"Skipping document with empty vocabulary: {filename}")
+                    print(f"Skipping document with empty vocabulary: {filename}")
                 else:
                     raise
     except Exception as e:
         error_message = f"Error processing {filename}: {str(e)}"
-        print_unicode_error(error_message)
+        print(error_message.encode('utf-8', 'replace').decode('utf-8'))
 
 # Insert the PDF data into MongoDB Atlas
 collection.insert_many(pdf_data)
