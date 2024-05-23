@@ -30,7 +30,6 @@
 - [How It Compares](#how-it-compares)
 - [License](#license)
 
->>>>>>> 04dd2444d72a3a2c950164f82c22ed4f6685247f
 
 ## Features
 
