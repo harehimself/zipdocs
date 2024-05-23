@@ -23,13 +23,17 @@
 <br><br>
 
 ## Table of Contents
+
 - [Table of Contents](#table-of-contents)
 - [Features](#features)
 - [Benefits](#benefits)
 - [How It Compares](#how-it-compares)
 - [License](#license)
 
+>>>>>>> 04dd2444d72a3a2c950164f82c22ed4f6685247f
+
 ## Features
+
 - Blazingly fast search across vast PDF collections
 - Advanced text analytics and natural language processing
 - Intuitive user interface for seamless navigation
@@ -38,6 +42,7 @@
 <br>
 
 ## Benefits
+
 - Save time by instantly locating relevant information
 - Gain deeper insights from comprehensive data analysis
 - Improve decision-making with quick access to critical data
@@ -46,6 +51,7 @@
 <br>
 
 ## How It Compares
+
 - Unparalleled search speed and accuracy
 - Cutting-edge AI and machine learning capabilities
 - Seamless integration with existing workflows
@@ -54,4 +60,5 @@
 <br>
 
 ## License
+
 Released under the permissive MIT License. Allows free use, modification, and distribution.
