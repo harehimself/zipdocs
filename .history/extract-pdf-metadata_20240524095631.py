@@ -1,7 +1,7 @@
 import os
 import csv
 from PyPDF2 import PdfReader
-from PyPDF2.errors import PdfReadError, EmptyFileError
+from PyPDF2.errors import PdfReadError
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -70,9 +70,8 @@ with open(output_file, "w", newline="", encoding="utf-8") as csv_file:
                             modification_date = metadata.get("/ModDate", "")
 
                     except PdfReadError as e:
-                        error = f"PdfReadError: {str(e)}"
-                    except EmptyFileError as e:
-                        error = f"EmptyFileError: {str(e)}"
+                        print(f"Error processing {filename}: {str(e)}")
+                        error = str(e)
 
                 # Write the metadata to the CSV file
                 row = [
@@ -90,13 +89,9 @@ with open(output_file, "w", newline="", encoding="utf-8") as csv_file:
                 writer.writerow(row)
 
             except Exception as e:
-                error = f"Exception: {str(e)}"
+                print(f"Error processing {filename}: {str(e)}")
                 # Write the filename and fill metadata fields with empty strings in case of an error
-                row = [filename, "", "", "", "", "", "", "", "", error]
+                row = [filename, "", "", "", "", "", "", "", "", str(e)]
                 writer.writerow(row)
-
-            # Print the error message, if any, with safe encoding handling
-            if error:
-                print(f"Error processing {filename}: {error}".encode('ascii', 'replace').decode('ascii'))
 
 print("Metadata extraction completed. Results saved to", output_file)
